@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-AGRO PRODUCTS</title>
+    <link rel="stylesheet" href="lib/fontawesome-free-6.6.0-web/css/all.css">
+    <link rel="stylesheet" href="./css/_variables.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <div class="products-screen">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-item">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Safe & Secure Payment</span>
+        </div>
+        <div class="header-item">
+          <i class="fa-solid fa-user-shield"></i>
+          <span>Expert Advice</span>
+        </div>
+        <div class="header-item">
+          <i class="fa-solid fa-thumbs-up"></i>
+          <span>Best Price Assured</span>
+        </div>
+      </div>
+
+      <div class="container" style="padding-bottom: 3rem">
+        <!-- Product Sections -->
+        <div class="section-header">
+          <h2 class="section-title">Seeds</h2>
+
+          <a href="#">View All</a>
+        </div>
+        <div class="product-grid" id="product-grid">  
+         </div>
+
+        <!-- ** <div class="section-header">
+          <h2 class="section-title">Seasonal</h2>
+
+          <a href="#">View All</a>
+        </div>
+        <div class="product-grid">** -->
+          <!-- Product Card 6-->
+          <!-- ** <div class="product-card">
+            <div class="discount-badge">26% OFF</div>** -->
+            <!-- ** favourite icon -->
+            <!-- <i class="far fa-heart"></i>
+
+            <div class="img-wrap">
+              <img
+                src="./assets/images/abhilash tomato.jpg"
+                alt="Abhilash Tomato Seeds"
+              />
+            </div>
+            <h4 class="product-name">
+              <a href="#"> Abhilash Tomato Seeds </a>
+            </h4>
+            <span class="product-brand">Seminis</span>
+            <p class="product-price">
+              ₹542 <span class="original-price">₹730</span>
+            </p>
+
+            <div class="saved-price">
+              <i class="fa-solid fa-percent"></i>
+              <span>Saved Price ₹467</span>
+            </div>
+
+            <div class="size">
+              <span>Size</span>
+              <select>
+                <option>Ivory White</option>
+              </select>
+            </div>
+          </div> ** -->
+      </div>
+
+      <!-- help desk button -->
+      <button class="help-desk">
+        <i class="fa-solid fa-headset"></i>
+      </button>
+    </div>
+
+  
+  </body>
+  <script>
+    let productData = [
+      {
+      name: "Saaho Tomato Seeds",
+      image: "./assets/images/abhilash tomato.jpg",
+      discount: 26,
+      price: 1500, 
+      size: "15kg", 
+      description: "The tomato is the edible berry of the plant solanum lycopersium", 
+      category: "vegetable" }
+      ,
+      {
+      name: "Syngenta Ivory White Seeds",
+      image: "./assets/images/syngenta-ivory.jpg",
+      discount: 20,
+      price: 1000, 
+      size: "13kg", 
+      description: "The tomato is the edible berry of the plant solanum lycopersium", 
+      category: "vegetable" 
+      }
+    ];
+
+    function displayProducts(){
+      const productContainer = document.getElementById("product-grid");
+
+      //generating UI
+      productData.forEach((product, index) => {
+        const productCard =`
+        <!-- Product Card 1-->
+          <div class="product-card" data-index="${index}" id="product-card">
+            <div class="discount-badge">26% OFF</div>
+            <!-- favourite icon -->
+            <i class="far fa-heart"></i>
+
+            <div class="img-wrap">
+              <img
+                src="${product.image}"
+                alt="Saaho Tomato Seeds [Tomato]"
+              />
+            </div>
+            <h4 class="product-name">
+              <a href="#"> ${product.name} </a>
+            </h4>
+            <span class="product-brand">Syngenta</span>
+            <p class="product-price">
+              ₹542 <span class="original-price">₹730</span>
+            </p>
+
+            <div class="saved-price">
+              <i class="fa-solid fa-percent"></i>
+              <span>Saved Price ₹467</span>
+            </div>
+
+            <div class="size">
+              <span>Size</span>
+              <select>
+                <option>Ivory White</option>
+              </select>
+            </div>
+          </div>
+ 
+          `;
+
+          //insert the product card into the container
+          productContainer.innerHTML += productCard;
+      });
+  
+
+    //add event listeners to all product cards
+    document.querySelectorAll(".product-card").forEach(card => {
+      card.addEventListener('click', (e) => {
+        const index = e.currentTarget.getAttribute('data-index');
+        const product = productData[index];
+        // console.log(`you clicked on: ${product.name}`);
+
+         //create function to save to localStorage()
+        const data = typeof product === 'object' ? JSON.stringify(product) : product;
+        localStorage.setItem("product", data);
+        window.location = "checkout.html"
+
+      });
+    });
+    }
+
+     //call the function to display products when the page loads
+     window.onload = displayProducts;
+
+    // document.getElementById("product-card").addEventListener("click", ()=>{
+    //  window.location = "checkout.html"
+    //  })
+  </script>
+
+</html>
